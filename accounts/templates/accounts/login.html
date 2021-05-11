@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5 pt-4">
+    
+    <div class="col-6 mx-auto">
+        <h3 class="text-center">Login</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="form-group col-12">
+                    <input type="text" placeholder="Email" class="form-control" name="email" id="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-12">
+                    <input type="password" placeholder="Password" class="form-control" name="password" id="">
+                </div>
+            </div>
+
+            <p>Don't have account? <a href="{% url 'accounts:register' %}">Register</a></p>
+            <p>Forgot Password? <a href="{% url 'accounts:forgot_password' %}">Forgot Password</a></p>
+            <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</div>
+
+
+{% endblock %}
