@@ -59,7 +59,7 @@ SECRET_KEY = '^$q9l$g-0!+ifmkh*0yn96%d_l@nia!nzg^nmw4nin^(sl%^3*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 AUTH_USER_MODEL = 'accounts.User'
-ALLOWED_HOSTS = ['equationreader.herokuapp.com','*', '127.0.0.1']
+ALLOWED_HOSTS = ['equationreader.herokuapp.com', '*', '127.0.0.1']
 
 
 # Application definition
@@ -78,7 +78,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -207,7 +207,7 @@ LOGOUT_REDIRECT_URL = 'home'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
-# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
