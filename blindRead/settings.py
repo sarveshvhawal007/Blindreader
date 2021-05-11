@@ -148,13 +148,14 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'testing',
-            'HOST': '127.0.0.1',
-            'PORT': '3306',
-            'USER': 'sarvesh',
-            'PASSWORD': 'password',
+            'NAME': 'heroku_5bd84cfbbbc757a',
+            'HOST': 'us-cdbr-east-03.cleardb.com',
+            # 'PORT': '3306',
+            'USER': 'b6068d79802a1d',
+            'PASSWORD': '124d2775',
         }
     }
+    # mysql: // b6068d79802a1d: 124d2775@us-cdbr-east-03.cleardb.com/heroku_5bd84cfbbbc757a?reconnect = true
 
 
 # Password validation
