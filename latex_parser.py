@@ -36,17 +36,17 @@ def text_checking(inp):
 
     for x in inp:
         if x == '(':
-            left_counter_1+=1
+            left_counter_1 += 1
         elif x == ')':
-            right_counter_1+=1
+            right_counter_1 += 1
         elif x == '{':
-            left_counter_2+=1
+            left_counter_2 += 1
         elif x == '}':
-            right_counter_2+=1
+            right_counter_2 += 1
         elif x == '[':
-            left_counter_3+=1
+            left_counter_3 += 1
         elif x == ']':
-            right_counter_3+=1
+            right_counter_3 += 1
 
         if left_counter_1 < right_counter_1:
             first = False
@@ -68,6 +68,7 @@ def latex_parser(input_content):
     print("==============================###################################")
 
     content = input_content.replace("\\\\", "\\")
+    print(input_content)
     util(content)
 
     file1 = open('temp.txt', 'w')
@@ -93,6 +94,9 @@ def util(content):
     while i < n:
         #i=i+1
         #print(i)
+        # if(flag):
+        #   print(content[i],"at flag")
+        # print("flag is ", flag)
         #flag=0 implies no special functions like frac and sqrt
         if (flag == 0):
             if (content[i] != '\\' and content[i] != '^'
@@ -104,7 +108,13 @@ def util(content):
                 #print(out)
 
             elif (content[i] == '\\'):  #flag when you see \
-
+                '''
+                if (content[i + 1] == "\\n"):
+                    print("error here")
+                    i = i + 1
+                else:
+                    '''
+                print("at \\", content[i + 1:i + 5])
                 flag = 1
                 i = i + 1
                 if (i == n):
@@ -189,6 +199,19 @@ def util(content):
                 i = i + 5
                 flag = 0
                 parsed_content += " times "
+            elif (content[i:i + 5] == "alpha"):
+                i = i + 5
+                flag = 0
+                parsed_content += "alpha"
+                print("alpha", content[i])
+            elif (content[i:i + 4] == "beta"):
+                i = i + 4
+                flag = 0
+                parsed_content += "beta"
+            elif (content[i:i + 5] == "gamma"):
+                i = i + 5
+                flag = 0
+                parsed_content += "gamma"
 
             elif (content[i:i + 4] == "sqrt"):
 
@@ -214,6 +237,13 @@ def util(content):
             elif (content[i:i + 5] == "right"):
                 flag = 0
                 i = i + 5
+            elif (content[i] == '{'):
+                i = i + 1
+                flag = 0
+            elif (content[i] == '}'):
+                i = i + 1
+                flag = 0
+
             elif (content[i] == '('):
                 i = i + 1
                 len_parsed = len(parsed_content)
@@ -261,7 +291,7 @@ def util(content):
 
                 i = i + 4
                 flag = 0
-            elif (content[i:i + 3] == "pm"):
+            elif (content[i:i + 2] == "pm"):
                 parsed_content = parsed_content + " plus or minus "
                 i = i + 2
                 flag = 0
@@ -277,12 +307,14 @@ def util(content):
                 parsed_content = parsed_content + "divided by"
                 i = i + 3
                 flag = 0
-            elif (content[i:i + 14] == "begin{aligned"):
-                i = i + 15
+            elif (content[i:i + 13] == "begin{aligned"):
+                i = i + 14
                 flag = 0
-            elif (content[i:i + 14] == "end{aligned"):
-                i = i + 13
+                print("at align", content[i])
+            elif (content[i:i + 11] == "end{aligned"):
+                i = i + 12
                 flag = 0
+                print("at end align", content[i])
 
             elif (content[i:i + 13] == "begin{tabular" or table == 1):
                 del_table = 0
@@ -296,7 +328,7 @@ def util(content):
                     if (del_table == 1):
                         i = temp + 11
                         flag = 0
-                if(del_table==0):
+                if (del_table == 0):
 
                     if table == 0:
                         table = 1
@@ -344,7 +376,7 @@ def util(content):
                 #str_remove = " equation start"
                 #parsed_content = parsed_content[:-(len(str_remove))]
                 is_array = 1
-                #   print("array begin")
+                print("array begin", content[i + 13])
                 i = i + 13
                 while (content[i] != '}'):
                     i = i + 1
@@ -445,4 +477,4 @@ def util(content):
 
 
 #if __name__ == "__main__":
-# print(latex_parser(content))
+latex_parser(content)
